@@ -27,7 +27,7 @@ function LoginPage() {
                 sessionStorage.setItem("isAuth", "true");
                 sessionStorage.setItem("token", response.data.token);
                 notyf.success("Benvenuto!");
-                navigate("/home");
+                navigate("/");
             } else {
                 setError("Invalid credentials. Please try again.");
                 sessionStorage.removeItem("user");

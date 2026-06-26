@@ -1,3 +1,5 @@
+import NotificationsIcon from "../../assets/notification.svg?react";
+
 const Header = () => {
     return <nav
         className="lg:justify-end navbar bg-base-100 max-sm:rounded-box max-sm:shadow-sm sm:border-b border-[#EEEEEE] z-50 relative ml-64 w-[calc(100%-16rem)]">
@@ -8,15 +10,19 @@ const Header = () => {
         <div className="navbar-end flex items-center gap-4">
             <div
                 className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
-                {/*icona menu sm*/}
+                {/*notifiche*/}
                 <button id="dropdown-scrollable" type="button"
                         className="dropdown-toggle btn btn-text btn-circle dropdown-open:bg-base-content/10 size-10"
                         aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                     <div className="indicator">
-                        <span className="indicator-item bg-error size-2 rounded-full"></span>
-                        <span className="icon-[tabler--bell] text-base-content size-5.5"></span>
+                        {false && (
+                            <span className="indicator-item bg-error size-2 rounded-full"></span>
+                        )}
+                        <NotificationsIcon className="text-gray-600"/>
+                        {/*<span className="icon-[tabler--bell] text-base-content size-5.5"></span>*/}
                     </div>
                 </button>
+                {/*dropdown notifiche*/}
                 <div className="dropdown-menu dropdown-open:opacity-100 hidden" role="menu"
                      aria-orientation="vertical"
                      aria-labelledby="dropdown-scrollable">
@@ -109,6 +115,7 @@ const Header = () => {
                     </a>
                 </div>
             </div>
+            {/*utente*/}
             <div
                 className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
                 <button id="dropdown-scrollable" type="button" className="dropdown-toggle flex items-center"
@@ -119,6 +126,7 @@ const Header = () => {
                         </div>
                     </div>
                 </button>
+                {/*menu notifiche*/}
                 <ul className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu"
                     aria-orientation="vertical" aria-labelledby="dropdown-avatar">
                     <li className="dropdown-header gap-2">

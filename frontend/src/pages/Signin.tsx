@@ -32,7 +32,7 @@ function SigninPage() {
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("isAuth", "true");
         notyf.success("Benvenuto!");
-        navigate("/home");
+        navigate("/");
       }
     } catch (err: any) {
       sessionStorage.removeItem("token");
