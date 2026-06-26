@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@plugin "flyonui";
+@plugin "flyonui" {
+    themes: light --default,
+    dark --prefersdark;
+}
+@source "./node_modules/flyonui/dist/index.js";
+
+@theme{
+    /*primary*/
+    --color-blue-50: #e8f1fd;
+    --color-blue-100: #b6d3fa;
+    --color-blue-200: #93bdf8;
+    --color-blue-300: #629ff4;
+    --color-blue-400: #448df2;
+    --color-blue-500: #1570ef;
+    --color-blue-600: #1366d9;
+    --color-blue-700: #0f50aa;
+    --color-blue-800: #0c3e83;
+    --color-blue-900: #092f64;
+    /*grigi*/
+    --color-gray-50: #f0f1f3;
+    --color-gray-100: #d0d3d9;
+    --color-gray-200: #b9bdc7;
+    --color-gray-300: #989fad;
+    --color-gray-400: #858d9d;
+    --color-gray-500: #667085;
+    --color-gray-600: #5D6679;
+    --color-gray-700: #48505e;
+    --color-gray-800: #383e49;
+    --color-gray-900: #2b2f38;
+    /*error*/
+    --color-red-50: #feeceb;
+    --color-red-100: #fac5c1;
+    --color-red-200: #f8a9a3;
+    --color-red-300: #f5827a;
+    --color-red-400: #f36960;
+    --color-red-500: #f04438;
+    --color-red-600: #da3e33;
+    --color-red-700: #aa3028;
+    --color-red-800: #84251f;
+    --color-red-900: #651d18;
+    /*warning*/
+    --color-yellow-50: #fef4e6;
+    --color-yellow-100: #fdddb3;
+    --color-yellow-200: #fbcc8e;
+    --color-yellow-300: #fab55a;
+    --color-yellow-400: #f9a63a;
+    --color-yellow-500: #f79009;
+    --color-yellow-600: #e18308;
+    --color-yellow-700: #af6606;
+    --color-yellow-800: #884f05;
+    --color-yellow-900: #683c04;
+    /*success*/
+    --color-green-50: #e7f8f0;
+    --color-green-100: #b6e9d1;
+    --color-green-200: #92deba;
+    --color-green-300: #60cf9b;
+    --color-green-400: #41c588;
+    --color-green-500: #12b76a;
+    --color-green-600: #10a760;
+    --color-green-700: #0d824b;
+    --color-green-800: #0a653a;
+    --color-green-900: #084d2d;
+    /*
+    primary cta: blue-500
+    total returned: 845EBC
+    total products: DBA362
+    in stock: green-500
+    out of stock: red-500
+    border: gray-50
+    heading: gray-800
+    sub heading: gray-600
+    body: gray-400
+    */
+}
+
+.dropdown.open > .dropdown-menu,
+.dropdown[open] .dropdown-menu {
+    opacity: 1;
+}
+
+.btn.btn-primary {
+    @apply --bg-primary-500;
+}
+
+.label-text {
+    /* color: #48505e; */
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input {
+    border: 1px solid #989fad86;
+    /* padding: 20px 15px; */
+}
+
+input.is-invalid {
+    border: 1px solid red;
+}
+
+input::placeholder {
+    font-size: 16px;
+    font-weight: normal;
+    color: #667085;
+}
