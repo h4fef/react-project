@@ -2,7 +2,7 @@ import type {LinkProp} from "../props/LinkProp.ts";
 
 export const navLinks: LinkProp[] = [
     {
-        href: '/',
+        href: '/home',
         routeName: 'Dashboard',
         icon: 'dashboard'
     },

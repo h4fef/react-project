@@ -26,8 +26,6 @@ function LoginPage() {
                 sessionStorage.setItem("user", JSON.stringify(user));
                 sessionStorage.setItem("isAuth", "true");
                 sessionStorage.setItem("token", response.data.token);
-                notyf.success("Benvenuto!");
-                navigate("/");
             } else {
                 setError("Invalid credentials. Please try again.");
                 sessionStorage.removeItem("user");
@@ -40,6 +38,11 @@ function LoginPage() {
             sessionStorage.removeItem("isAuth");
             const error = err?.response?.data;
             setError(error.message);
+        } finally {
+            console.log("Prima del navigate");
+            notyf.success("Benvenuto!");
+            navigate("/home", {replace: true});
+            console.log("Dopo del navigate");
         }
     };
     return (
