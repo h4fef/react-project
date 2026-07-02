@@ -2,6 +2,7 @@ import {useState} from "react";
 import {login} from "../services/AuthService.js";
 import {Link, useNavigate} from "react-router";
 import {notyf} from "../components/toastr/Notyf.ts";
+import {useAuth} from "../context/AuthCtxt.tsx";
 
 
 function LoginPage() {
@@ -10,6 +11,7 @@ function LoginPage() {
     const [rememberME, setRememberME] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const {setToken} = useAuth();
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -17,32 +19,17 @@ function LoginPage() {
             // Send a GET request to the signup endpoint to retrieve user data
             const response = await login({email, password, rememberMe: rememberME});
             if (response.data.token) {
-                setError("");
-                const user = {
-                    email,
-                    password,
-                    rememberME
-                };
-                sessionStorage.setItem("user", JSON.stringify(user));
-                sessionStorage.setItem("isAuth", "true");
-                sessionStorage.setItem("token", response.data.token);
+                setToken(response.data.token);
+                notyf.success("Benvenuto!");
+                navigate("/home", {replace: true});
             } else {
                 setError("Invalid credentials. Please try again.");
-                sessionStorage.removeItem("user");
-                sessionStorage.removeItem("token");
-                sessionStorage.removeItem("isAuth");
+                setToken(null);
             }
         } catch (err: any) {
-            sessionStorage.removeItem("user");
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("isAuth");
+            setToken(null);
             const error = err?.response?.data;
             setError(error.message);
-        } finally {
-            console.log("Prima del navigate");
-            notyf.success("Benvenuto!");
-            navigate("/home", {replace: true});
-            console.log("Dopo del navigate");
         }
     };
     return (

@@ -13,10 +13,8 @@ import ProfilePage from "./pages/Profile.tsx";
 import StorePage from "./pages/Store.tsx";
 import SettingsPage from "./pages/Settings.tsx";
 import SuppliersPage from "./pages/Suppliers.tsx";
-import type {UserModel} from "./models/UserModel.ts";
-import {useCallback, useEffect, useState} from "react";
-import {profile} from "./services/AuthService";
-import {notyf} from "./components/toastr/Notyf.ts";
+import {useAuth} from "./context/AuthCtxt.tsx";
+import {useFlyonuiInit} from "./components/navigation/useFlyonuiInit.ts";
 
 const ProtectedRoute = ({user, redirectPath = "/login"}: ProtectedRouteProps) => {
     console.log("ProtectedRoute", user);
@@ -33,42 +31,8 @@ const LoaderSpinner = () => {
 }
 
 function App() {
-    const token = sessionStorage.getItem("token") || null;
-    const [user, setUser] = useState<UserModel | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const fetchUser = useCallback(async () => {
-        if (!token) {
-            setUser(null);
-            setLoading(false);
-            return;
-        }
-        try {
-            const response = await profile();
-            const data = response.data as UserModel;
-            if (!data) {
-                setUser(null);
-                notyf.error("Si è verificato un errore. Ricaricare la pagina.");
-                return;
-            }
-            setUser(data);
-
-        } catch (err: any) {
-            const error = err?.response?.data;
-            console.error(error);
-            setUser(null);
-            sessionStorage.removeItem('isAuth');
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('token');
-            notyf.error(error);
-        } finally {
-            setLoading(false);
-        }
-    }, [token]);
-
-    useEffect(() => {
-        void fetchUser()
-    }, [fetchUser]);
-
+    const {token, user, loading} = useAuth();
+    useFlyonuiInit();
     if (loading) {
         return <LoaderSpinner/>
     }

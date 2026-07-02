@@ -2,6 +2,7 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router";
 import {signin} from "../services/AuthService.js";
 import {notyf} from "../components/toastr/Notyf.ts";
+import {useAuth} from "../context/AuthCtxt.tsx";
 
 function SigninPage() {
     const [name, setName] = useState("");
@@ -11,6 +12,7 @@ function SigninPage() {
     const [isInvalidPsw, setIsInvalidPsw] = useState(false);
     const [isInvalidEmail, setIsInvalidEmail] = useState(false);
     const navigate = useNavigate();
+    const {setToken} = useAuth();
     const handleSignin = async (e) => {
         e.preventDefault();
         setIsInvalidPsw(false);
@@ -29,21 +31,19 @@ function SigninPage() {
                 setIsInvalidPsw(false);
                 setIsInvalidEmail(false);
                 setInvalidEmailMsg("");
-                sessionStorage.setItem("token", response.data.token);
-                sessionStorage.setItem("isAuth", "true");
-
+                setToken(response.data.token);
+                notyf.success("Benvenuto!");
+                navigate("/home", {replace: true});
+            } else {
+                setToken(null);
             }
         } catch (err: any) {
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("isAuth");
+            setToken(null);
             const error = err.response.data;
             if (error.message.toLowerCase().includes("email")) {
                 setIsInvalidEmail(true);
                 setInvalidEmailMsg(error.message);
             }
-        } finally {
-            notyf.success("Benvenuto!");
-            navigate("/home", {replace: true});
         }
     };
 
