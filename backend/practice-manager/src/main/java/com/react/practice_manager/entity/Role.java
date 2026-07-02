@@ -1,6 +1,7 @@
 package com.react.practice_manager.entity;
 
 public enum Role {
-    ADMIN,
-    EMPLOYEE
+    AMMINISTRATORE,
+    RESPONSABILE_MAGAZZINO,
+    MAGAZZINIERE
 }

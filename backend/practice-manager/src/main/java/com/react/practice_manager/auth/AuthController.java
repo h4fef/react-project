@@ -34,6 +34,7 @@ public class AuthController {
 
         User user = new User();
         user.setName(request.getName());
+        user.setSurname(request.getSurname());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 

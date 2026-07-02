@@ -124,7 +124,7 @@ public class User {
         this.updatedAt = LocalDateTime.now();
 
         if (this.role == null) {
-            this.role = Role.EMPLOYEE;
+            this.role = Role.MAGAZZINIERE;
         }
     }
 
