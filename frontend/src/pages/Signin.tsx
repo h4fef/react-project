@@ -6,6 +6,7 @@ import {useAuth} from "../context/AuthCtxt.tsx";
 
 function SigninPage() {
     const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
     const [msgInvalidEmail, setInvalidEmailMsg] = useState("");
     const [password, setPassword] = useState("");
@@ -25,7 +26,7 @@ function SigninPage() {
 
         try {
             // Send a GET request to the signup endpoint to retrieve user data
-            const response = await signin({name, email, password});
+            const response = await signin({name, surname, email, password});
             if (!response) return;
             if (response.data.token) {
                 setIsInvalidPsw(false);
@@ -70,7 +71,7 @@ function SigninPage() {
                 >
                     <div className="w-96">
                         <label className="label-text" htmlFor="inputName">
-                            Nome e cognome*
+                            Nome*
                         </label>
                         <input
                             type="text"
@@ -79,6 +80,20 @@ function SigninPage() {
                             id="inputName"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="w-96">
+                        <label className="label-text" htmlFor="inputSurname">
+                            Cognome*
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Inserisci il tuo cognome"
+                            className={`input input-lg inset-shadow-sm`}
+                            id="inputSurname"
+                            value={surname}
+                            onChange={(e) => setSurname(e.target.value)}
                             required
                         />
                     </div>

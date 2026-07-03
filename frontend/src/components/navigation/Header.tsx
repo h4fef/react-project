@@ -1,6 +1,17 @@
-import NotificationsIcon from "../../assets/notification.svg?react";
+// import NotificationsIcon from "../../assets/notification.svg?react";
+import SettingsIcon from "../../assets/settings.svg?react";
+import ProfileIcon from "../../assets/suppliers.svg?react";
+import LogoutIcon from "../../assets/logout.svg?react";
+import PhUser from "../../assets/user.jpg";
+import {useFlyonuiInit} from "./useFlyonuiInit.ts";
+import {useAuth} from "../../context/AuthCtxt.tsx";
+import {Link, useNavigate} from "react-router";
+import {notyf} from "../toastr/Notyf.ts";
 
 const Header = () => {
+    useFlyonuiInit();
+    const {user, setToken} = useAuth();
+    const navigate = useNavigate();
     return <nav
         className="lg:justify-end navbar bg-base-100 max-sm:rounded-box max-sm:shadow-sm sm:border-b border-[#EEEEEE] z-50 relative ml-64 w-[calc(100%-16rem)]">
         <button type="button" className="btn btn-text max-sm:btn-square sm:hidden me-2" aria-haspopup="dialog"
@@ -11,19 +22,16 @@ const Header = () => {
             <div
                 className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
                 {/*notifiche*/}
-                <button id="dropdown-scrollable" type="button"
+                {/*<button id="dropdown-scrollable" type="button"
                         className="dropdown-toggle btn btn-text btn-circle dropdown-open:bg-base-content/10 size-10"
                         aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                     <div className="indicator">
-                        {false && (
-                            <span className="indicator-item bg-error size-2 rounded-full"></span>
-                        )}
+                        <span className="indicator-item bg-error size-2 rounded-full"></span>
                         <NotificationsIcon className="text-gray-600"/>
-                        {/*<span className="icon-[tabler--bell] text-base-content size-5.5"></span>*/}
                     </div>
-                </button>
+                </button>*/}
                 {/*dropdown notifiche*/}
-                <div className="dropdown-menu dropdown-open:opacity-100 hidden" role="menu"
+                {/*<div className="dropdown-menu dropdown-open:opacity-100 hidden" role="menu"
                      aria-orientation="vertical"
                      aria-labelledby="dropdown-scrollable">
                     <div className="dropdown-header justify-center">
@@ -114,64 +122,67 @@ const Header = () => {
                         View all
                     </a>
                 </div>
+            */}
             </div>
             {/*utente*/}
-            <div
-                className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
-                <button id="dropdown-scrollable" type="button" className="dropdown-toggle flex items-center"
-                        aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                    <div className="avatar">
-                        <div className="size-9.5 rounded-full">
-                            <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" alt="avatar 1"/>
-                        </div>
-                    </div>
-                </button>
-                {/*menu notifiche*/}
-                <ul className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu"
-                    aria-orientation="vertical" aria-labelledby="dropdown-avatar">
-                    <li className="dropdown-header gap-2">
+            {user && (
+                <div
+                    className="dropdown relative inline-flex [--auto-close:outside] [--offset:8] [--placement:bottom-end]">
+                    <button id="dropdown-scrollable" type="button" className="dropdown-toggle flex items-center"
+                            aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                         <div className="avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" alt="avatar"/>
+                            <div className="size-9.5 rounded-full">
+                                <img src={user.photo ?? PhUser} alt="avatar 1"/>
                             </div>
                         </div>
-                        <div>
-                            <h6 className="text-base-content text-base font-semibold">John Doe</h6>
-                            <small className="text-base-content/50">Admin</small>
-                        </div>
-                    </li>
-                    <li>
-                        <a className="dropdown-item" href="#">
-                            <span className="icon-[tabler--user]"></span>
-                            My Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a className="dropdown-item" href="#">
-                            <span className="icon-[tabler--settings]"></span>
-                            Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a className="dropdown-item" href="#">
-                            <span className="icon-[tabler--receipt-rupee]"></span>
-                            Billing
-                        </a>
-                    </li>
-                    <li>
-                        <a className="dropdown-item" href="#">
-                            <span className="icon-[tabler--help-triangle]"></span>
-                            FAQs
-                        </a>
-                    </li>
-                    <li className="dropdown-footer gap-2">
-                        <a className="btn btn-error btn-soft btn-block" href="#">
-                            <span className="icon-[tabler--logout]"></span>
-                            Sign out
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                    </button>
+                    {/*menu utente*/}
+                    <ul className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu"
+                        aria-orientation="vertical" aria-labelledby="dropdown-avatar">
+                        <li className="dropdown-header gap-2">
+                            <div className="avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={user.photo ?? PhUser} alt="avatar 1"/>
+                                </div>
+                            </div>
+                            <div>
+                                {user.name ? (
+                                    <h6 className="text-base-content text-base font-semibold">{`${user.name} ${user.surname ?? '-'}`}</h6>
+                                ) : (
+                                    <h6 className="text-base-content text-base font-semibold">-</h6>
+                                )}
+                                {user.role && (
+                                    <small className="text-base-content/50">{user.role}</small>
+                                )}
+                            </div>
+                        </li>
+                        <li>
+                            <Link className="dropdown-item" to="/profile">
+                                <ProfileIcon className="text-gray-600"/>
+                                Profilo
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="dropdown-item" to="/settings">
+                                <SettingsIcon className="text-gray-600"/>
+                                Impostazioni
+                            </Link>
+                        </li>
+                        <li className="dropdown-footer gap-2">
+                            <button className="btn btn-error btn-soft btn-block" type="button" onClick={() => {
+                                setToken(null);
+                                notyf.success("Logout effettuato con successo!");
+                                navigate("/login", {replace: true});
+
+                            }}>
+                                <LogoutIcon className="w-4 h-4"/>
+                                Esci
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+            )}
         </div>
     </nav>
 

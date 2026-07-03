@@ -14,7 +14,6 @@ import StorePage from "./pages/Store.tsx";
 import SettingsPage from "./pages/Settings.tsx";
 import SuppliersPage from "./pages/Suppliers.tsx";
 import {useAuth} from "./context/AuthCtxt.tsx";
-import {useFlyonuiInit} from "./components/navigation/useFlyonuiInit.ts";
 
 const ProtectedRoute = ({user, redirectPath = "/login"}: ProtectedRouteProps) => {
     console.log("ProtectedRoute", user);
@@ -32,7 +31,6 @@ const LoaderSpinner = () => {
 
 function App() {
     const {token, user, loading} = useAuth();
-    useFlyonuiInit();
     if (loading) {
         return <LoaderSpinner/>
     }
@@ -40,7 +38,7 @@ function App() {
         <main className="bg-white w-full h-full">
             <Routes>
                 <Route path="/" element={<ProtectedRoute user={token}/>}>
-                    <Route path="/home" element={<HomePage user={user!}/>}/>
+                    <Route path="/home" element={<HomePage/>}/>
                     <Route path="/inventory" element={<InventaryPage/>}/>
                     <Route path="/reports" element={<ReportsPage/>}/>
                     <Route path="/suppliers" element={<SuppliersPage/>}/>
