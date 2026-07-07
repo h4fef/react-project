@@ -9,7 +9,7 @@ import Layout from "./components/layout/Layout.tsx";
 import InventaryPage from "./pages/Inventary.tsx";
 import ReportsPage from "./pages/Report.tsx";
 import OrdersPage from "./pages/Orders.tsx";
-import ProfilePage from "./pages/Profile.tsx";
+import ProfilePage from "./pages/ProfilePage/Profile.tsx";
 import StorePage from "./pages/Store.tsx";
 import SettingsPage from "./pages/Settings.tsx";
 import SuppliersPage from "./pages/Suppliers.tsx";
@@ -30,7 +30,7 @@ const LoaderSpinner = () => {
 }
 
 function App() {
-    const {token, user, loading} = useAuth();
+    const {token, loading} = useAuth();
     if (loading) {
         return <LoaderSpinner/>
     }

@@ -9,7 +9,9 @@ const Navigation = ({children}: PropsWithChildren) => {
         <div className="flex flex-col min-h-screen">
             <Header/>
             <main className="flex-1 p-8 bg-gray-50">
-                {children}
+                <section className="h-full card-margin">
+                    {children}
+                </section>
             </main>
         </div>
     </div>

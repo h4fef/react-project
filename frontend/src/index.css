@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@plugin "flyonui";
+@plugin "daisyui" {
+    prefix: "d-";
+};
 @plugin "flyonui" {
     themes: light --default,
     dark --prefersdark;
@@ -75,13 +77,17 @@
     */
 }
 
+@utility d-btn{
+    @apply px-4 py-2.5;
+}
+
+@utility d-btn-info{
+    @apply bg-blue-500;
+}
+
 .dropdown.open > .dropdown-menu,
 .dropdown[open] .dropdown-menu {
     opacity: 1;
-}
-
-.btn.btn-primary {
-    @apply --bg-primary-500;
 }
 
 .label-text {
@@ -103,4 +109,8 @@ input::placeholder {
     font-size: 16px;
     font-weight: normal;
     color: #667085;
+}
+
+.card-margin {
+    margin-left: calc(var(--spacing) * 64);
 }

@@ -2,7 +2,7 @@
 import SettingsIcon from "../../assets/settings.svg?react";
 import ProfileIcon from "../../assets/suppliers.svg?react";
 import LogoutIcon from "../../assets/logout.svg?react";
-import PhUser from "../../assets/user.jpg";
+import PhUser from "/user.jpg";
 import {useFlyonuiInit} from "./useFlyonuiInit.ts";
 import {useAuth} from "../../context/AuthCtxt.tsx";
 import {Link, useNavigate} from "react-router";
