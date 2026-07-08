@@ -3,20 +3,19 @@ import { login } from "../services/AuthService.js";
 import { Link, useNavigate } from "react-router";
 import { notyf } from "../components/toastr/Notyf.ts";
 import { useAuth } from "../context/AuthCtxt.tsx";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import type { UserModel } from "../models/UserModel.ts";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberME, setRememberME] = useState(false);
+  const { register, handleSubmit } = useForm<UserModel>();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { setToken } = useAuth();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<UserModel> = async (data) => {
     setError("");
     try {
       // Send a GET request to the signup endpoint to retrieve user data
-      const response = await login({ email, password, rememberMe: rememberME });
+      const response = await login(data);
       if (response.data.token) {
         setToken(response.data.token);
         notyf.success("Benvenuto!");
@@ -50,58 +49,51 @@ function LoginPage() {
         </div>
         <form
           className="flex flex-col items-center gap-5 mb-8"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="w-96">
-            <label
-              className={`label-text ${error ? "" : "text-gray-700"}`}
-              htmlFor="inputEmail"
-            >
+          <div className="w-96 space-y-3">
+            <label htmlFor="inputEmail" className="input-label mb-1.5">
               Email
             </label>
             <input
+              id="inputEmail"
               type="email"
               placeholder="Inserisci la tua email"
-              className={`${error ? "is-invalid" : ""} input input-lg inset-shadow-sm`}
-              id="inputEmail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              className="input-field"
+              {...register("email", { required: true })}
             />
           </div>
-          <div className="w-96">
-            <label
-              className={`label-text ${error ? "" : "text-gray-700"}`}
-              htmlFor="inputPsw"
-            >
+          <div className="w-96 space-y-3">
+            <label htmlFor="inputPsw" className="input-label mb-1.5">
               Password
             </label>
             <input
-              type="password"
-              placeholder="******"
-              className={`${error ? "is-invalid" : ""} input input-lg inset-shadow-sm`}
               id="inputPsw"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="*****"
+              className="input-field"
+              {...register("password", { required: true })}
             />
           </div>
-          <div className="flex items-center gap-1 w-96">
-            <input
-              type="checkbox"
-              className="checkbox checkbox-accent checkbox-md"
-              id="rememberME"
-              checked={rememberME}
-              onChange={(e) => setRememberME(e.target.checked)}
-            />
-            <label className="label-text text-base" htmlFor="rememberME">
-              Ricordami
-            </label>
+          <div className="max-w-sm w-full space-y-3">
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                className="input-check size-4"
+                id="rememberME"
+                {...register("rememberME")}
+              />
+              <label htmlFor="rememberME" className="input-label">
+                Ricordami
+              </label>
+            </div>
           </div>
           {error && (
             <div className="text-start w-96">
               <span className="helper-text text-error">{error}</span>
             </div>
           )}
-          <button className="btn bg-[#1366D9] border-0 w-96 rounded-sm px-5 py-2.5">
+          <button type="submit" className="bg-blue-600 w-96 text-white">
             Accedi
           </button>
         </form>

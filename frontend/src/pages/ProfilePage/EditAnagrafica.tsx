@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { editProfile } from "../../services/AuthService";
 import { notyf } from "../../components/toastr/Notyf.ts";
 import { useAuth } from "../../context/AuthCtxt.tsx";
-import Flatpickr from "react-flatpickr";
 const EditAnagrafica = ({
   userData,
   canSubmit,
@@ -54,7 +53,7 @@ const EditAnagrafica = ({
               defaultValue={userData!.name}
               className="input"
               id="inputEditName"
-              {...(register("name"), { required: true })}
+              {...register("name", { required: true })}
             />
             {errors.name && (
               <div className="text-start w-96">
@@ -78,7 +77,7 @@ const EditAnagrafica = ({
               defaultValue={userData!.surname}
               className="input"
               id="inputEditSurname"
-              {...(register("surname"), { required: true })}
+              {...register("surname", { required: true })}
             />
             {errors.surname && (
               <div className="text-start w-96">
@@ -104,15 +103,8 @@ const EditAnagrafica = ({
               defaultValue={userData!.birthDate}
               className="input"
               id="inputEditDate"
-              {...(register("birthDate"), { required: true })}
+              {...register("birthDate", { required: true })}
             />
-            {/* <Flatpickr
-              data-enable-time
-              value={userData!.birthDate}
-              onChange={([date]) => {
-                console.log(date);
-              }}
-            /> */}
             {errors.birthDate && (
               <div className="text-start w-96">
                 <span className="helper-text text-error">
