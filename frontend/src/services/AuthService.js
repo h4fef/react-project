@@ -7,3 +7,4 @@ const userPath = "users/me";
 export const login = (body) => api.post(loginPath, body);
 export const signin = (body) => api.post(registerPath, body);
 export const profile = () => api.get(userPath, {});
+export const editProfile = (body) => api.put(userPath, body);

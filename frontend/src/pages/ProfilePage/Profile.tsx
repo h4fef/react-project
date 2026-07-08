@@ -5,9 +5,11 @@ import {useAuth} from "../../context/AuthCtxt.tsx";
 import ModalComponent from "../../components/modals/ModalComponent.tsx";
 import type {ModalProps} from "../../models/ModalProps.ts";
 import EditAnagrafica from "./EditAnagrafica.tsx";
+import {useState} from "react";
 
 const ProfilePage = () => {
     const {user} = useAuth();
+    const [isEditConfirmed, setEditConfirmed] = useState<boolean>(false);
     const openModal = (id: string) => {
         document.getElementById(id)!.showModal();
     };
@@ -33,6 +35,10 @@ const ProfilePage = () => {
     const editAnagraficaModal: ModalProps = {
         title: "Modifica dati anagrafici",
     };
+
+    const handleConfirmed = (isConfirmed: boolean) => {
+        setEditConfirmed(isConfirmed);
+    }
 
     return (
         <Card card={cardData}>
@@ -174,8 +180,8 @@ const ProfilePage = () => {
                     />
                 </div>
             </div>
-            <ModalComponent modalData={editAnagraficaModal}>
-                <EditAnagrafica userData={user!}/>
+            <ModalComponent modalData={editAnagraficaModal} sendConfirm={handleConfirmed}>
+                <EditAnagrafica userData={user!} canSubmit={isEditConfirmed}/>
             </ModalComponent>
         </Card>
     );

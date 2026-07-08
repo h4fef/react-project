@@ -1,12 +1,14 @@
-import type {ReactNode} from "react";
+import {type ReactNode} from "react";
 import type {ModalProps} from "../../models/ModalProps";
 
 const ModalComponent = ({
                             modalData,
                             children,
+                            sendConfirm
                         }: {
     modalData: ModalProps;
     children?: ReactNode;
+    sendConfirm: (confirmed?: boolean) => void;
 }) => {
     return (
         <dialog id="modalComponent" className="d-modal">
@@ -21,14 +23,20 @@ const ModalComponent = ({
                         <button
                             className="d-btn rounded-sm bg-gray-50 border-gray-50"
                             type="button"
-                            onClick={() => document.getElementById("modalComponent")?.close()}
+                            onClick={() => {
+                                sendConfirm(false);
+                                document.getElementById("modalComponent")?.close();
+                            }}
                         >
                             Chiudi
                         </button>
                         <button
                             className="d-btn rounded-sm bg-blue-600 text-white border-blue-600"
                             type="button"
-                            onClick={() => document.getElementById("modalComponent")?.close()}
+                            onClick={() => {
+                                sendConfirm(true);
+                                document.getElementById("modalComponent")?.close();
+                            }}
                         >
                             Salva
                         </button>
