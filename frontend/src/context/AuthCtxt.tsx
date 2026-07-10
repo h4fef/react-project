@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { profile } from "../services/AuthService";
+import { profile } from "../services/AuthService.ts";
 import type { UserModel } from "../models/UserModel.ts";
 
 type AuthContextType = {

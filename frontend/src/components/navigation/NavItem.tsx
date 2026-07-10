@@ -4,8 +4,8 @@ import {linkIcons} from "../../data/linkIcons.ts";
 
 const NavItem = (linkProp: LinkProp) => {
     const Icon = linkIcons[linkProp.icon];
-    return <li className="">
-        <NavLink to={linkProp.href} className="gap-4">
+    return <li className="p-3 rounded-sm hover:bg-[#d0d3d991]">
+        <NavLink to={linkProp.href} className="flex gap-4">
             {({isActive}) => (
                 <>
                     <Icon className={isActive ? 'text-blue-500' : 'text-gray-600'}/>

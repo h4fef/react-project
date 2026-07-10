@@ -27,7 +27,7 @@ function LoginPage() {
     } catch (err: any) {
       setToken(null);
       const error = err?.response?.data;
-      setError(error.message);
+      setError(error?.message ?? "Si è verificato un errore. Riprova più tardi.");
     }
   };
   return (

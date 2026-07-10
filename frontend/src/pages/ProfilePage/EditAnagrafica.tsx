@@ -1,7 +1,7 @@
 import type { UserModel } from "../../models/UserModel.ts";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { editProfile } from "../../services/AuthService";
+import { editProfile } from "../../services/AuthService.ts";
 import { notyf } from "../../components/toastr/Notyf.ts";
 import { useAuth } from "../../context/AuthCtxt.tsx";
 const EditAnagrafica = ({
