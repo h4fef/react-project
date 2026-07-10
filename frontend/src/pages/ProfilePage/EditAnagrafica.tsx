@@ -43,7 +43,7 @@ const EditAnagrafica = ({
         <div className="flex flex-col">
           <div className="w-96">
             <label
-              className="label-text text-base! text-gray-700"
+              className="input-label text-base! mb-2"
               htmlFor="inputEditName"
             >
               Nome
@@ -51,7 +51,7 @@ const EditAnagrafica = ({
             <input
               type="text"
               defaultValue={userData!.name}
-              className="input"
+              className="input-field"
               id="inputEditName"
               {...register("name", { required: true })}
             />
@@ -67,7 +67,7 @@ const EditAnagrafica = ({
         <div className="flex flex-col">
           <div className="w-96">
             <label
-              className="label-text text-base! text-gray-700"
+              className="input-label text-base! mb-2"
               htmlFor="inputEditSurname"
             >
               Cognome
@@ -75,7 +75,7 @@ const EditAnagrafica = ({
             <input
               type="text"
               defaultValue={userData!.surname}
-              className="input"
+              className="input-field"
               id="inputEditSurname"
               {...register("surname", { required: true })}
             />
@@ -93,15 +93,15 @@ const EditAnagrafica = ({
         <div className="flex flex-col">
           <div className="w-96">
             <label
-              className="label-text text-base! text-gray-700"
+              className="input-label text-base! mb-2"
               htmlFor="inputEditDate"
             >
               Data di Nascita
             </label>
             <input
-              type="text"
+              type="date"
               defaultValue={userData!.birthDate}
-              className="input"
+              className="input-field"
               id="inputEditDate"
               {...register("birthDate", { required: true })}
             />
@@ -117,7 +117,7 @@ const EditAnagrafica = ({
         <div className="flex flex-col">
           <div className="w-96">
             <label
-              className="label-text text-base! text-gray-700"
+              className="input-label text-base! mb-2"
               htmlFor="inputEditTelefono"
             >
               Telefono/Cellulare
@@ -125,7 +125,7 @@ const EditAnagrafica = ({
             <input
               type="text"
               defaultValue={userData!.phone}
-              className="input"
+              className="input-field"
               id="inputEditTelefono"
               {...register("phone")}
             />
@@ -136,7 +136,7 @@ const EditAnagrafica = ({
         <div className="flex flex-col">
           <div className="w-96">
             <label
-              className="label-text text-base! text-gray-700"
+              className="input-label text-base! mb-2"
               htmlFor="inputEditAddress"
             >
               Indirizzo
@@ -144,7 +144,7 @@ const EditAnagrafica = ({
             <input
               type="search"
               defaultValue={userData!.address}
-              className="input"
+              className="input-field"
               id="inputEditAddress"
               {...register("address")}
             />
@@ -153,7 +153,7 @@ const EditAnagrafica = ({
         <div className="flex flex-col">
           <div className="w-96">
             <label
-              className="label-text text-base! text-gray-700"
+              className="input-label text-base! mb-2"
               htmlFor="inputEditCity"
             >
               Città
@@ -161,7 +161,7 @@ const EditAnagrafica = ({
             <input
               type="text"
               defaultValue={userData!.city}
-              className="input"
+              className="input-field"
               id="inputEditCity"
               {...register("city")}
               readOnly

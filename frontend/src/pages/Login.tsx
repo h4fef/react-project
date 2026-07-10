@@ -93,7 +93,7 @@ function LoginPage() {
               <span className="helper-text text-error">{error}</span>
             </div>
           )}
-          <button type="submit" className="bg-blue-600 w-96 text-white">
+          <button type="submit" className="bg-primary-600 w-96 text-white">
             Accedi
           </button>
         </form>
