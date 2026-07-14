@@ -1,5 +1,4 @@
-import type { CardProps } from "../../models/CardModel.ts";
-import type { ReactNode } from "react";
+import type { CardComponentProps } from "../../models/CardModel.ts";
 
 const btnClasses: Record<string, string> = {
   info: "bg-primary-600 text-primary-foreground hover:bg-primary-hover",
@@ -8,7 +7,7 @@ const btnClasses: Record<string, string> = {
     "bg-layer! border! border-gray-100! text-gray-600 hover:bg-layer-hover!",
 };
 
-const Card = ({ card, children }: { card: CardProps; children: ReactNode }) => {
+const Card = ({ card, children, actions }: CardComponentProps) => {
   return (
     <div className="flex flex-col bg-white shadow-2xs rounded-lg">
       <div className="px-4 pt-3 pb-8">
@@ -17,21 +16,21 @@ const Card = ({ card, children }: { card: CardProps; children: ReactNode }) => {
             {card.title}
           </h3>
           {/* azioni */}
-          <div className="flex gap-5">
-            {card?.actionsTop?.map((action, i) => {
-              const btnClss = btnClasses[action.type] ?? "d-btn-info";
-              return (
-                <button
-                  type="button"
-                  key={`action-top-${i}`}
-                  onClick={action.function}
-                  className={`inline-flex items-center rounded-lg! ${btnClss}`}
-                >
-                  {action.title}
-                </button>
-              );
-            })}
-          </div>
+          {actions && <div className="flex gap-5">{actions}</div>}
+
+          {/* {card?.actionsTop?.map((action, i) => {
+            const btnClss = btnClasses[action.type] ?? "d-btn-info";
+            return (
+              <Button
+                type="button"
+                key={`action-top-${i}`}
+                onClick={action.function}
+                className={`inline-flex items-center rounded-lg! ${btnClss}`}
+              >
+                {action.title}
+              </Button>
+            );
+          })} */}
         </div>
         {card?.description && (
           <p className="mt-1 mb-4 text-muted-foreground-1">

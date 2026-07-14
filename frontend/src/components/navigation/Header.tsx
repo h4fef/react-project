@@ -35,11 +35,11 @@ const Header = () => {
               <div className="relative">
                 <div className="absolute inset-y-0 inset-s-0 flex items-center pointer-events-none z-20 ps-4">
                   {/* TODO: SOSTITUIRE CON ICONA DI FIGMA */}
-                  <SearchIcon class="size-6 text-grey-400" />
+                  <SearchIcon className="size-6 text-grey-400" />
                 </div>
                 <input
                   type="text"
-                  className="py-2.5 ps-2 pe-6.5 block w-full bg-layer border-grey-50 rounded-lg text-base text-grey-800! placeholder:text-grey-400!"
+                  className="py-2.5 ps-10 pe-6.5 block w-full bg-layer border-grey-50 rounded-lg text-base border border-[#989fad86] text-grey-800! placeholder:text-grey-400!"
                   placeholder="Cerca"
                 />
                 <div className="hidden absolute inset-y-0 inset-e-0 flex items-center z-20 pe-1">
@@ -77,21 +77,7 @@ const Header = () => {
                 type="button"
                 className="md:hidden size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-foreground hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus disabled:opacity-50 disabled:pointer-events-none"
               >
-                <svg
-                  className="shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
+                <SearchIcon className="size-6 text-grey-400" />
                 <span className="sr-only">Search</span>
               </button>
 
