@@ -1,6 +1,6 @@
 import type { UserModel } from "../../models/UserModel.ts";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
-import { useEffect, useState, type ChangeEventHandler } from "react";
+import { useEffect, useState } from "react";
 import { editProfile, searchAddress } from "../../services/AuthService.ts";
 import { notyf } from "../../components/toastr/Notyf.ts";
 import { useAuth } from "../../context/AuthCtxt.tsx";
@@ -23,19 +23,14 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/tailgrids/core/dialog";
-import { Button } from "@/components/tailgrids/core/button.tsx";
 import { ButtonPrimary } from "@/components/buttons/ButtonPrimary.tsx";
+import type { EditProps } from "./EditProps.ts";
 const EditAnagrafica = ({
   userData,
   canSubmit,
   isEditOpen,
   setEditOpen,
-}: {
-  userData: UserModel;
-  isEditOpen: boolean;
-  canSubmit?: boolean;
-  setEditOpen: () => void;
-}) => {
+}: EditProps) => {
   const {
     register,
     handleSubmit,
@@ -57,7 +52,6 @@ const EditAnagrafica = ({
   const [addresses, setAddresses] = useState<any>([]);
   const onEdit: SubmitHandler<UserModel> = async (data) => {
     try {
-      console.log(data);
       const response = await editProfile(data);
       if (response?.status == 200) {
         notyf.success("Profilo modificato con successo!");

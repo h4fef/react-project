@@ -5,11 +5,15 @@ import EditAnagrafica from "./EditAnagrafica.tsx";
 import { useState } from "react";
 import { formatDate } from "../../services/UtilityService.ts";
 import { ButtonPrimary } from "@/components/buttons/ButtonPrimary.tsx";
+import { EditProfilePhoto } from "./EditProfilePhoto.tsx";
+import { EditPsw } from "./EditPsw.tsx";
 
 const ProfilePage = () => {
   const { user } = useAuth();
   const [isEditConfirmed, setEditConfirmed] = useState<boolean>(false);
   const [isEditOpen, setEditOpen] = useState<boolean>(false);
+  const [isPhotoOpen, setPhotoOpen] = useState<boolean>(false);
+  const [isPswOpen, setIsPswOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -19,19 +23,17 @@ const ProfilePage = () => {
           <>
             <ButtonPrimary
               action="Modifica anagrafica"
-              doAction={() => {
-                setEditOpen(true);
-              }}
+              doAction={() => setEditOpen(true)}
               type="button"
             />
             <ButtonPrimary
               action="Modifica immagine"
-              doAction={() => console.log("clicked")}
+              doAction={() => setPhotoOpen(true)}
               type="button"
             />
             <ButtonPrimary
               action="Cambia password"
-              doAction={() => console.log("clicked")}
+              doAction={() => setIsPswOpen(true)}
               type="button"
             />
           </>
@@ -178,6 +180,12 @@ const ProfilePage = () => {
         isEditOpen={isEditOpen}
         canSubmit={isEditConfirmed}
         setEditOpen={setEditOpen}
+      />
+      <EditProfilePhoto />
+      <EditPsw
+        isEditOpen={isPswOpen}
+        setEditOpen={setIsPswOpen}
+        canSubmit={isEditConfirmed}
       />
     </>
   );

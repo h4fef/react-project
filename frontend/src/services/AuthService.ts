@@ -1,3 +1,4 @@
+import type { ChangePswType } from "@/pages/ProfilePage/ChangePswType";
 import type { UserModel } from "../models/UserModel";
 import { api } from "./ApiService";
 
@@ -14,4 +15,5 @@ export const searchAddress = (searchInput: string) => api.get(searchAddresses, {
     params: {
         search: searchInput
     }
-})
+});
+export const editPsw = (body: ChangePswType) => api.put(`${userPath}/password`, body);
